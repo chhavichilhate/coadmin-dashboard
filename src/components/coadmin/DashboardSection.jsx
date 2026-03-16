@@ -64,7 +64,7 @@ function SprintDonut() {
           <div style={{ fontSize:10, color:'var(--muted)', marginTop:2 }}>Adherence</div>
         </div>
       </div>
-      <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+      <div style={{ display:'flex', flexDirection:'row', gap:12 }}>
         {[
           { c:'#22c55e', l:'Healthy'   },
           { c:'#3b82f6', l:'Planned'   },
