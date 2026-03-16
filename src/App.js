@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Layout from './components/Layout';
 import CoAdmin from './pages/CoAdmin';
+import Projects from './pages/Projects';
 import Chat from './pages/Chat';
 import Meetings from './pages/Meetings';
 import Documents from './pages/Documents';
@@ -27,14 +28,15 @@ export default function App() {
             <Layout />
           </PrivateRoute>
         }>
-          <Route index        element={<CoAdmin />}   />
-          <Route path="chat"       element={<Chat />}      />
-          <Route path="meetings"   element={<Meetings />}  />
-          <Route path="documents"  element={<Documents />} />
-          <Route path="complaints" element={<Complaints />}/>
-          <Route path="notices"    element={<Notices />}   />
-          <Route path="attendance" element={<Attendance />}/>
-          <Route path="settings"   element={<Settings />}  />
+          <Route index           element={<CoAdmin />}    />
+          <Route path="projects"     element={<Projects />}   />
+          <Route path="chat"         element={<Chat />}       />
+          <Route path="meetings"     element={<Meetings />}   />
+          <Route path="documents"    element={<Documents />}  />
+          <Route path="complaints"   element={<Complaints />} />
+          <Route path="notices"      element={<Notices />}    />
+          <Route path="attendance"   element={<Attendance />} />
+          <Route path="settings"     element={<Settings />}   />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

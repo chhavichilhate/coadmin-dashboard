@@ -1,267 +1,182 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { RiDashboardLine } from 'react-icons/ri';
+import { FiFolder, FiMessageSquare, FiCalendar, FiFileText, FiAlertTriangle, FiVolume2, FiClock, FiSettings, FiLogOut } from 'react-icons/fi';
 
 const NAV_ITEMS = [
-  { path:'/',           label:'Dashboard',          icon:'⊞', exact:true },
-  { path:'/chat',       label:'Chat',               icon:'💬', badge:4   },
-  { path:'/meetings',   label:'Meetings',           icon:'📅'            },
-  { path:'/documents',  label:'Documents & Report', icon:'📄'            },
-  { path:'/complaints', label:'Complaints',         icon:'📢', badge:2   },
-  { path:'/notices',    label:'Notice',             icon:'🔔'            },
-  { path:'/attendance', label:'Attendance & Leave', icon:'🗓️'            },
-  { path:'/settings',   label:'Settings',           icon:'⚙️'            },
+  { path:'/',           label:'Dashboard',           Icon:RiDashboardLine, exact:true },
+  { path:'/projects',   label:'Projects',            Icon:FiFolder                    },
+  { path:'/chat',       label:'Chat',                Icon:FiMessageSquare, badge:10   },
+  { path:'/meetings',   label:'Meetings',            Icon:FiCalendar,      badge:2    },
+  { path:'/documents',  label:'Documents And Report',Icon:FiFileText                  },
+  { path:'/complaints', label:'Complaints',          Icon:FiAlertTriangle             },
+  { path:'/notices',    label:'Notice',              Icon:FiVolume2,       badge:3    },
+  { path:'/attendance', label:'Attendance And Leave',Icon:FiClock                     },
+  { path:'/settings',   label:'Settings',            Icon:FiSettings                  },
 ];
 
-const NOTIFICATIONS = [
-  { icon:'🔴', title:'API Dependency Failure',    desc:'Payment gateway blocked by external team', time:'2m ago',  unread:true  },
-  { icon:'⚠️', title:'QA Environment Latency',    desc:'Response time 3x normal — check server',  time:'15m ago', unread:true  },
-  { icon:'✅', title:'Sprint 20 Kickoff Ready',   desc:'All tasks assigned successfully',          time:'1h ago',  unread:true  },
-  { icon:'📢', title:'New Complaint Submitted',   desc:'CMP-006 marked as Critical priority',      time:'2h ago',  unread:false },
-  { icon:'📅', title:'Meeting Reminder',          desc:'Design Review today at 2:00 PM',           time:'3h ago',  unread:false },
-  { icon:'📄', title:'Report Ready',              desc:'Q1 Performance Report is available',       time:'5h ago',  unread:false },
-  { icon:'👥', title:'New Team Member',           desc:'Emma Wilson joined the Design team',       time:'1d ago',  unread:false },
-];
+/* ── AI Assistant ── */
+function AIAssistant() {
+  const [open,  setOpen]  = useState(false);
+  const [hover, setHover] = useState(false);
+  const [input, setInput] = useState('');
+  const [msgs,  setMsgs]  = useState([{ from:'ai', text:'Hi! How can I help you today? 😊' }]);
+  const [loading,setLoading]=useState(false);
+
+  const send = () => {
+    if (!input.trim()) return;
+    const text = input.trim(); setInput('');
+    setMsgs(p => [...p, { from:'user', text }]);
+    setLoading(true);
+    setTimeout(() => {
+      const r = ['Sure! Check the relevant section.','You can find that in Dashboard.','Let me assist you!','Check Settings for that feature.'][Math.floor(Math.random()*4)];
+      setMsgs(p => [...p, { from:'ai', text:r }]);
+      setLoading(false);
+    }, 1000);
+  };
+
+  return (
+    <div style={{ position:'fixed', bottom:24, right:24, zIndex:9999 }}>
+      {open && (
+        <div style={{ position:'absolute', bottom:62, right:0, width:300, height:380, background:'var(--card)', border:'1px solid var(--border)', borderRadius:16, boxShadow:'var(--shadow-lg)', display:'flex', flexDirection:'column', overflow:'hidden', transformOrigin:'bottom right', animation:'scaleIn .2s ease both' }}>
+          <div style={{ padding:'14px 16px', background:'#3b82f6', display:'flex', alignItems:'center', gap:10 }}>
+            <div style={{ width:32, height:32, borderRadius:'50%', background:'rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16 }}>🤖</div>
+            <div style={{ flex:1 }}>
+              <div style={{ fontSize:13, fontWeight:700, color:'#fff' }}>AI Assistant</div>
+              <div style={{ fontSize:10, color:'rgba(255,255,255,.8)' }}>Always here to help!</div>
+            </div>
+            <button onClick={() => setOpen(false)} style={{ background:'none', border:'none', color:'#fff', fontSize:18, cursor:'pointer' }}>✕</button>
+          </div>
+          <div style={{ flex:1, overflowY:'auto', padding:12, display:'flex', flexDirection:'column', gap:10 }}>
+            {msgs.map((m,i) => (
+              <div key={i} style={{ display:'flex', justifyContent:m.from==='user'?'flex-end':'flex-start' }}>
+                <div style={{ maxWidth:'80%', padding:'8px 12px', borderRadius:12, fontSize:12, lineHeight:1.5, background:m.from==='user'?'#3b82f6':'var(--bg)', color:m.from==='user'?'#fff':'var(--text)' }}>{m.text}</div>
+              </div>
+            ))}
+            {loading && <div style={{ display:'flex', gap:4, padding:'8px 12px' }}>{[0,1,2].map(i=><div key={i} style={{ width:6,height:6,borderRadius:'50%',background:'#94a3b8' }}/>)}</div>}
+          </div>
+          <div style={{ padding:10, borderTop:'1px solid var(--border)', display:'flex', gap:8 }}>
+            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()} placeholder="Type your question..." style={{ flex:1, padding:'8px 12px', borderRadius:20, border:'1.5px solid var(--border)', background:'var(--bg)', color:'var(--text)', fontSize:12, outline:'none' }}/>
+            <button onClick={send} style={{ width:34,height:34,borderRadius:'50%',background:'#3b82f6',border:'none',color:'#fff',fontSize:14,cursor:'pointer' }}>➤</button>
+          </div>
+        </div>
+      )}
+      {hover && !open && (
+        <div style={{ position:'absolute', bottom:58, right:0, background:'#3b82f6', color:'#fff', padding:'6px 14px', borderRadius:20, fontSize:12, fontWeight:600, whiteSpace:'nowrap', boxShadow:'var(--shadow)' }}>Need help? ask me!</div>
+      )}
+      <button onClick={()=>setOpen(o=>!o)} onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)}
+        style={{ width:50, height:50, borderRadius:'50%', background:'#3b82f6', border:'none', color:'#fff', fontSize:22, cursor:'pointer', boxShadow:'0 4px 20px rgba(59,130,246,.5)', display:'flex', alignItems:'center', justifyContent:'center', transition:'all .2s' }}>
+        🤖
+      </button>
+    </div>
+  );
+}
 
 export default function Layout() {
-  const [collapsed,  setCollapsed]  = useState(false);
-  const [dark,       setDark]       = useState(() => localStorage.getItem('coadmin_theme') === 'dark');
-  const [time,       setTime]       = useState('');
-  const [showNotif,  setShowNotif]  = useState(false);
-  const [showAllNotif, setShowAllNotif] = useState(false);
-  const [notifs,     setNotifs]     = useState(NOTIFICATIONS);
-  const notifRef = useRef(null);
+  const [collapsed, setCollapsed] = useState(false);
+  const [dark,      setDark]      = useState(() => localStorage.getItem('coadmin_theme') === 'dark');
+  const [day,       setDay]       = useState('');
+  const [dateStr,   setDateStr]   = useState('');
   const navigate = useNavigate();
 
-  /* Theme */
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
     localStorage.setItem('coadmin_theme', dark ? 'dark' : 'light');
-    // Dispatch event so Settings page can sync
     window.dispatchEvent(new CustomEvent('themeChanged', { detail: dark }));
   }, [dark]);
 
-  /* Clock */
   useEffect(() => {
     const tick = () => {
       const n = new Date();
-      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
       const mons = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      setTime(`${days[n.getDay()]}, ${mons[n.getMonth()]} ${n.getDate()} ${n.getFullYear()}  ${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`);
+      setDay(days[n.getDay()]);
+      const dd = String(n.getDate()).padStart(2,'0');
+      setDateStr(`${mons[n.getMonth()]} ${dd},${n.getFullYear()}`);
     };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 
-  /* Close dropdown on outside click */
-  useEffect(() => {
-    const handler = (e) => {
-      if (notifRef.current && !notifRef.current.contains(e.target)) {
-        setShowNotif(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
-
-  const logout = () => { sessionStorage.removeItem('coadmin_auth'); navigate('/login'); };
-  const markAllRead = () => setNotifs(notifs.map(n => ({ ...n, unread: false })));
-  const markOne = (i) => { const u = [...notifs]; u[i] = { ...u[i], unread:false }; setNotifs(u); };
-  const unreadCount = notifs.filter(n => n.unread).length;
-
+  const logout  = () => { sessionStorage.removeItem('coadmin_auth'); navigate('/login'); };
   const profile = JSON.parse(localStorage.getItem('coadmin_profile') || '{"setName":"John Doe","setRole":"Co-Admin"}');
-  const initials = profile.setName.split(' ').map(p => p[0]).join('').toUpperCase().slice(0,2);
+  const initials = profile.setName.split(' ').map(p=>p[0]).join('').toUpperCase().slice(0,2);
 
   return (
     <div className="app">
 
-      {/* SIDEBAR */}
+      {/* ── SIDEBAR ── */}
       <aside className={'sidebar' + (collapsed ? ' collapsed' : '')}>
-        <div className="sb-logo">
-          <div className="sb-logo-icon">CA</div>
-          <div>
-            <div className="sb-logo-name">CoAdmin</div>
-            <div className="sb-logo-tag">Project Suite</div>
-          </div>
+
+        {/* Hamburger only — no brand name */}
+        <div style={{ padding:'14px 12px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', flexShrink:0 }}>
+          <button className="ham-btn" onClick={() => setCollapsed(c => !c)}>
+            <span /><span /><span />
+          </button>
         </div>
-        <div className="sb-section">Main</div>
-        <nav className="sb-nav">
+
+        {/* Nav */}
+        <nav className="sb-nav" style={{ flex:1, paddingTop:6 }}>
           {NAV_ITEMS.map((item, i) => (
             <NavLink key={i} to={item.path} end={item.exact}
               className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}>
-              <div className="nav-ico">{item.icon}</div>
+              <div className="nav-ico">
+                <item.Icon size={18} strokeWidth={1.8} />
+              </div>
               <span className="nav-lbl">{item.label}</span>
               {item.badge && <span className="nav-badge">{item.badge}</span>}
             </NavLink>
           ))}
         </nav>
-        <div className="sb-footer">
-          <div className="nav-item" onClick={logout} style={{ cursor:'pointer', color:'var(--red)' }}>
-            <div className="nav-ico">🚪</div>
-            <span className="nav-lbl">Log Out</span>
+
+        {/* Log Out */}
+        <div style={{ padding:'10px', borderTop:'1px solid var(--border)', flexShrink:0 }}>
+          <div className="nav-item" onClick={logout} style={{ cursor:'pointer', color:'var(--red)', fontWeight:700 }}>
+            <div className="nav-ico" style={{ color:'var(--red)' }}>
+              <FiLogOut size={18} strokeWidth={1.8} />
+            </div>
+            <span className="nav-lbl" style={{ color:'var(--red)', fontWeight:700 }}>Log Out</span>
           </div>
         </div>
       </aside>
 
-      {/* MAIN */}
+      {/* ── MAIN ── */}
       <div className="main">
 
-        {/* TOPBAR */}
+        {/* ── TOPBAR — exactly Figma ── */}
         <header className="topbar">
 
-          {/* LEFT */}
-          <div style={{ display:'flex', alignItems:'center', gap:14 }}>
-            <button className="ham-btn" onClick={() => setCollapsed(c => !c)}>
-              <span /><span /><span />
-            </button>
-            <div style={{ display:'flex', alignItems:'center', gap:10 }}>
-              <div className="user-av">{initials}</div>
-              <div>
-                <div className="user-name">{profile.setName}</div>
-                <div className="user-role">{profile.setRole || 'Co-Admin'}</div>
+          {/* LEFT: Avatar + Hello John Doe + Co-Admin */}
+          <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+            <div style={{ width:42, height:42, borderRadius:'50%', background:'linear-gradient(135deg,#ef4444,#dc2626)', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:14, fontWeight:800, flexShrink:0, boxShadow:'0 2px 8px rgba(239,68,68,.3)' }}>{initials}</div>
+            <div>
+              <div style={{ fontSize:13, color:'var(--text)', lineHeight:1.2 }}>
+                Hello! <strong style={{ fontWeight:800 }}>{profile.setName}</strong>
+              </div>
+              <div style={{ fontSize:11, color:'var(--muted)', fontFamily:'var(--font-b)' }}>
+                {profile.setRole || 'Co-Admin'}
               </div>
             </div>
           </div>
 
-          {/* RIGHT */}
-          <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+          {/* RIGHT: Date + Toggle (NO bell — matches Figma) */}
+          <div style={{ display:'flex', alignItems:'center', gap:16 }}>
 
-            {/* Clock */}
-            <div className="hdr-clock">{time}</div>
-
-            {/* Bell */}
-            <div style={{ position:'relative' }} ref={notifRef}>
-              <button
-                className="icon-btn"
-                onClick={() => { setShowNotif(s => !s); setShowAllNotif(false); }}
-                style={showNotif ? { background:'var(--active)', borderColor:'var(--blue)' } : {}}
-              >
-                🔔
-                {unreadCount > 0 && (
-                  <span style={{
-                    position:'absolute', top:-4, right:-4,
-                    width:17, height:17, borderRadius:'50%',
-                    background:'#ef4444', color:'#fff',
-                    fontSize:9, fontWeight:700,
-                    display:'flex', alignItems:'center', justifyContent:'center',
-                    border:'2px solid var(--card)', fontFamily:'var(--font)'
-                  }}>{unreadCount}</span>
-                )}
-              </button>
-
-              {/* DROPDOWN */}
-              {showNotif && (
-                <div style={{
-                  position:'absolute', top:'calc(100% + 10px)', right:0,
-                  width: showAllNotif ? 360 : 320,
-                  background:'var(--card)',
-                  border:'1px solid var(--border)',
-                  borderRadius:14, boxShadow:'var(--shadow-lg)',
-                  zIndex:1000, overflow:'hidden',
-                  animation:'scaleIn .18s ease both',
-                  transformOrigin:'top right'
-                }}>
-
-                  {/* Dropdown Header */}
-                  <div style={{
-                    display:'flex', alignItems:'center', justifyContent:'space-between',
-                    padding:'14px 16px', borderBottom:'1px solid var(--border)'
-                  }}>
-                    <div style={{ fontSize:13, fontWeight:800, color:'var(--text)', display:'flex', alignItems:'center', gap:8 }}>
-                      {showAllNotif ? 'All Notifications' : 'Notifications'}
-                      {unreadCount > 0 && !showAllNotif && (
-                        <span style={{ background:'var(--blue)', color:'#fff', fontSize:9, fontWeight:700, padding:'2px 7px', borderRadius:10 }}>
-                          {unreadCount} new
-                        </span>
-                      )}
-                    </div>
-                    <div style={{ display:'flex', gap:8, alignItems:'center' }}>
-                      {unreadCount > 0 && (
-                        <button onClick={markAllRead} style={{ background:'none', border:'none', cursor:'pointer', fontSize:11, color:'var(--blue)', fontWeight:600, fontFamily:'var(--font)' }}>
-                          Mark all read
-                        </button>
-                      )}
-                      {showAllNotif && (
-                        <button onClick={() => setShowAllNotif(false)} style={{ background:'none', border:'none', cursor:'pointer', fontSize:11, color:'var(--muted)', fontWeight:600, fontFamily:'var(--font)' }}>
-                          ← Back
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Notif List */}
-                  <div style={{ maxHeight: showAllNotif ? 460 : 300, overflowY:'auto' }}>
-                    {(showAllNotif ? notifs : notifs.slice(0,5)).map((n, i) => (
-                      <div
-                        key={i}
-                        onClick={() => markOne(i)}
-                        style={{
-                          display:'flex', alignItems:'flex-start', gap:11,
-                          padding:'12px 16px',
-                          background: n.unread ? 'var(--hover)' : 'transparent',
-                          borderBottom:'1px solid var(--border)',
-                          cursor:'pointer', transition:'background .15s'
-                        }}
-                      >
-                        <div style={{
-                          width:34, height:34, borderRadius:9,
-                          background: n.unread ? 'var(--active)' : 'var(--bg)',
-                          display:'flex', alignItems:'center', justifyContent:'center',
-                          fontSize:14, flexShrink:0, border:'1px solid var(--border)'
-                        }}>{n.icon}</div>
-
-                        <div style={{ flex:1, minWidth:0 }}>
-                          <div style={{ fontSize:12, fontWeight: n.unread ? 700 : 600, color:'var(--text)', marginBottom:2 }}>
-                            {n.title}
-                          </div>
-                          <div style={{ fontSize:11, color:'var(--muted)', fontFamily:'var(--font-b)', marginBottom:3 }}>
-                            {n.desc}
-                          </div>
-                          <div style={{ fontSize:10, color:'var(--muted)', fontFamily:'var(--font-b)' }}>
-                            🕐 {n.time}
-                          </div>
-                        </div>
-
-                        {n.unread && (
-                          <div style={{ width:7, height:7, borderRadius:'50%', background:'var(--blue)', flexShrink:0, marginTop:6 }} />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Footer */}
-                  {!showAllNotif && (
-                    <div style={{ padding:'10px 16px', borderTop:'1px solid var(--border)', textAlign:'center' }}>
-                      <button
-                        onClick={() => setShowAllNotif(true)}
-                        style={{
-                          background:'var(--blue-l)', border:'none', cursor:'pointer',
-                          fontSize:12, color:'var(--blue)', fontWeight:600,
-                          fontFamily:'var(--font)', padding:'7px 20px',
-                          borderRadius:8, width:'100%', transition:'all .2s'
-                        }}
-                      >
-                        View all {notifs.length} notifications →
-                      </button>
-                    </div>
-                  )}
-
-                </div>
-              )}
+            {/* Date — "Friday | Dec 26,2025" */}
+            <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', whiteSpace:'nowrap' }}>
+              {day} | {dateStr}
             </div>
 
-            {/* Dark Mode */}
-            <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-              <span style={{ fontSize:15 }}>{dark ? '🌙' : '☀️'}</span>
-              <div
-                className={'toggle-track' + (dark ? ' on' : '')}
-                onClick={() => setDark(d => !d)}
-                title={dark ? 'Switch to Light' : 'Switch to Dark'}
-              >
-                <div className="toggle-thumb" />
-              </div>
+            
+            {/* Green toggle */}
+            <div
+              className={'toggle-track' + (dark ? ' on' : '')}
+              onClick={() => setDark(d => !d)}
+              style={{ cursor:'pointer', flexShrink:0 }}
+            >
+              <div className="toggle-thumb" />
             </div>
-
           </div>
         </header>
 
@@ -270,6 +185,9 @@ export default function Layout() {
           <Outlet />
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant />
     </div>
   );
 }
