@@ -126,7 +126,7 @@ export default function Layout() {
           : (collapsed ? ' collapsed' : ''))
       }>
 
-        {/* Hamburger only — no brand name */}
+        {/* Hamburger only  */}
         <div style={{ padding:'14px 12px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', flexShrink:0 }}>
           <button className="ham-btn" onClick={() => setCollapsed(c => !c)} style={{ flexShrink:0 }}>
             <span /><span /><span />
@@ -161,7 +161,7 @@ export default function Layout() {
       {/* ── MAIN ── */}
       <div className="main">
 
-        {/* ── TOPBAR — exactly Figma ── */}
+        {/* ── TOPBAR  */}
         <header className="topbar">
 
           {/* LEFT: Avatar + Hello John Doe + Co-Admin */}
@@ -177,7 +177,7 @@ export default function Layout() {
             </div>
           </div>
 
-          {/* RIGHT: Date + Toggle (NO bell — matches Figma) */}
+          {/* RIGHT: Date + Toggle  */}
           <div style={{ display:'flex', alignItems:'center', gap:16 }}>
 
             {/* Date — "Friday | Dec 26,2025" */}
@@ -185,15 +185,8 @@ export default function Layout() {
               {day} | {dateStr}
             </div>
 
-            {/* Blue star icon like Figma */}
-            <div style={{
-              width:32, height:32, borderRadius:'50%',
-              background: dark ? '#1e40af' : '#3b82f6',
-              display:'flex', alignItems:'center', justifyContent:'center',
-              color:'#fff', fontSize:14, flexShrink:0
-            }}>✦</div>
 
-            {/* Green toggle — Figma style */}
+            {/* Green toggle  */}
             <div
               className={'toggle-track' + (dark ? ' on' : '')}
               onClick={() => setDark(d => !d)}

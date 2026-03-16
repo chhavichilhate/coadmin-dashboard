@@ -22,7 +22,7 @@ const PROJECT_PROGRESS = [
 
 // data hardcoded in components below
 
-/* ══ Sprint Health Donut — Green DOMINANT like screenshot ══ */
+/* ══ Sprint Health Donut  ══ */
 function SprintDonut() {
   const ref   = useRef(null);
   const chart = useRef(null);
@@ -80,7 +80,7 @@ function SprintDonut() {
   );
 }
 
-/* ══ Team Bar Chart — canvas directly, guaranteed bars ══ */
+/* ══ Team Bar Charts ══ */
 function TeamBarChart() {
   const ref   = useRef(null);
   const chart = useRef(null);
@@ -248,7 +248,7 @@ export default function DashboardSection() {
         <TeamBarChart />
       </div>
 
-      {/* ── 6. Bottleneck Detection — exactly like Figma ── */}
+      {/* ── 6. Bottleneck Detection  ── */}
       <div className="card mb">
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:18 }}>
           <div style={{ fontSize:15, fontWeight:800, color:'var(--text)' }}>Bottleneck Detection</div>
