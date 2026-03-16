@@ -1,9 +1,9 @@
 // src/components/coadmin/AnalyticsSection.jsx
 import React, { useEffect, useRef } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend, Filler } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, LineController, DoughnutController, ArcElement, Tooltip, Legend, Filler } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend, Filler);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, LineController, DoughnutController, ArcElement, Tooltip, Legend, Filler);
 
 const ANALYTICS_STATS = [
   { label:'Total Tasks',     value:50,    sub:'+4 this week',        icon:'📋', color:'#eff6ff', hl:false },

@@ -1,9 +1,9 @@
 // src/components/coadmin/DashboardSection.jsx
 import React, { useEffect, useRef } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, BarController, DoughnutController, ArcElement, Tooltip, Legend } from 'chart.js';
 
 // Register ALL needed components
-ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, BarController, DoughnutController, ArcElement, Tooltip, Legend);
 
 const STATS = [
   { label:'Total Tasks', value:142, change:'+5%',  up:true,  icon:'📋', ic:'#eff6ff' },
@@ -64,7 +64,7 @@ function SprintDonut() {
           <div style={{ fontSize:10, color:'var(--muted)', marginTop:2 }}>Adherence</div>
         </div>
       </div>
-      <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+      <div style={{ display:'flex', flexDirection:'row', gap:12 }}>
         {[
           { c:'#22c55e', l:'Healthy'   },
           { c:'#3b82f6', l:'Planned'   },

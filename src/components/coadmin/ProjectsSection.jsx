@@ -100,7 +100,7 @@ export default function ProjectsSection() {
               <div style={{fontSize:10,color:'var(--muted)',textTransform:'uppercase'}}>Projects</div>
             </div>
           </div>
-          <div style={{display:'flex',flexDirection:'column',gap:14}}>
+          <div style={{display:'flex',flexDirection:'row',gap:14}}>
             {[{c:'#22c55e',l:'Healthy',p:'60%'},{c:'#f59e0b',l:'Warning',p:'30%'},{c:'#ef4444',l:'Critical',p:'10%'}].map((x,i)=>(
               <div key={i} style={{display:'flex',alignItems:'center',gap:10,fontSize:13,color:'var(--text2)'}}>
                 <div style={{width:10,height:10,borderRadius:'50%',background:x.c,flexShrink:0}}/>
