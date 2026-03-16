@@ -66,7 +66,7 @@ export default function Chat() {
     const colors = ['#ef4444','#3b82f6','#22c55e','#f59e0b','#a855f7','#14b8a6'];
     const newContact = { id:contacts.length, name:newName, init:newName[0].toUpperCase(), color:colors[contacts.length%colors.length], time:'Now', msg:'New conversation', unread:0 };
     setContacts(prev => [newContact, ...prev]);
-    setMessages(prev => ({ ...prev, [0]: [] }));
+    setMessages(prev => ({ ...prev, 0: [] }));
     setShowNew(false); setNewName('');
     setActive(0);
     toast_('✅ New chat created!');

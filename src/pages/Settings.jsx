@@ -41,6 +41,7 @@ export default function Settings() {
   };
 
   // Toggle dark mode — updates Layout too via localStorage + data-theme
+  // eslint-disable-next-line no-unused-vars
   const toggleDark = () => {
     const newDark = !dark;
     setDark(newDark);

@@ -20,18 +20,7 @@ const PROJECT_PROGRESS = [
   { name:'David Kim',     pct:60,  color:'#94a3b8', label:'Available'},
 ];
 
-const TEAM_PERF = [
-  { name:'Sarah', done:28, avg:3.2 },
-  { name:'Mike',  done:20, avg:4.1 },
-  { name:'Jess',  done:32, avg:2.8 },
-  { name:'David', done:16, avg:5.0 },
-];
-
-const DASH_ALERTS = [
-  { type:'error',   title:'API Dependency Failure',       desc:'Payment gateway integration is failing due to 500 errors from provider. Blocking checkout flow.' },
-  { type:'warning', title:'QA Environment Latency',       desc:'Staging environment is experiencing high latency. Slowing down the QA review process significantly.' },
-  { type:'info',    title:'Missing Assets for Sprint 25', desc:'Design assets for the upcoming sprint not received on time or complete.' },
-];
+// data hardcoded in components below
 
 /* ══ Sprint Health Donut — Green DOMINANT like screenshot ══ */
 function SprintDonut() {
@@ -51,14 +40,14 @@ function SprintDonut() {
         // Blue (Planned) is medium — about 20%
         // Gray (Remaining) is small — about 10%
         datasets: [{
-          data: [80, 10, 10],
-          backgroundColor: ['#22c55e', '#3b82f6', '#e5e7eb'],
+          data: [70, 20, 10],
+          backgroundColor: ['#22c55e', '#3b82f6', '#e2e8f0'],
           borderWidth: 0,
-          hoverBorderWidth: 4,
+          hoverBorderWidth: 0,
         }]
       },
       options: {
-        cutout: '85%',
+        cutout: '68%',
         plugins: { legend: { display: false } },
         animation: { duration: 700 }
       }
@@ -71,11 +60,11 @@ function SprintDonut() {
       <div style={{ width:130, height:130, position:'relative', flexShrink:0 }}>
         <canvas ref={ref} />
         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', textAlign:'center' }}>
-          <div style={{ fontSize:'22px', fontWeight:800, color:'var(--text)', lineHeight:1 }}>90%</div>
-          <div style={{ fontSize:'10px', color:'var(--muted)', marginTop:2 }}>Adherence</div>
+          <div style={{ fontSize:22, fontWeight:800, color:'var(--text)', lineHeight:1 }}>90%</div>
+          <div style={{ fontSize:10, color:'var(--muted)', marginTop:2 }}>Adherence</div>
         </div>
       </div>
-      <div style={{ display:'flex', flexDirection:'row', gap:20 ,alignItems: 'center'}}>
+      <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
         {[
           { c:'#22c55e', l:'Healthy'   },
           { c:'#3b82f6', l:'Planned'   },
@@ -294,11 +283,11 @@ export default function DashboardSection() {
           {/* Row 3 — Development STUCK (red warning, more indented) */}
           <div style={{
             display:'flex', alignItems:'center', gap:8,
-            padding:'4px 8px',
+            padding:'9px 12px',
             marginLeft:24,
             background:'rgba(239,68,68,.07)',
-            borderRadius:'4px',
-            border:'1px solid rgba(239,68,68,.0.2)',
+            borderRadius:8,
+            border:'1px solid rgba(239,68,68,.18)',
           }}>
             <span style={{ fontSize:14, flexShrink:0 }}>⚠️</span>
             <span style={{ fontSize:12.5, fontWeight:600, color:'var(--text)', width:100, flexShrink:0 }}>Development</span>
