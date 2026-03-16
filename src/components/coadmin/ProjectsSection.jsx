@@ -45,7 +45,7 @@ const PROJ_ALERTS = [
 
 export default function ProjectsSection() {
   const [timeView, setTimeView] = useState('Month');
-  const [_page, setPage] = useState(1);
+  const [, setPage] = useState(1);
 
   const healthData = {
     labels:['Healthy','Warning','Critical'],
