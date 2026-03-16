@@ -55,7 +55,7 @@ export default function ProjectsSection() {
   return (
     <div>
       {/* 1. Stats */}
-      <div style={{display:'flex',gap:12,marginBottom:16}}>
+      <div className="stats-flex-row" style={{display:'flex',gap:12,marginBottom:16}}>
         {PROJ_STATS.map((s,i)=>(
           <div key={i} style={{background:'var(--card)',border:s.hl?`1.5px solid ${s.bc}`:'1px solid var(--border)',borderRadius:12,padding:'14px 16px',flex:1,minWidth:0,position:'relative'}}>
             <div style={{position:'absolute',top:12,right:12,width:28,height:28,borderRadius:7,background:s.ic,display:'flex',alignItems:'center',justifyContent:'center',fontSize:14}}>{s.icon}</div>
@@ -100,7 +100,7 @@ export default function ProjectsSection() {
               <div style={{fontSize:10,color:'var(--muted)',textTransform:'uppercase'}}>Projects</div>
             </div>
           </div>
-          <div style={{display:'flex',flexDirection:'row',gap:14}}>
+          <div style={{display:'flex',flexDirection:'column',gap:14}}>
             {[{c:'#22c55e',l:'Healthy',p:'60%'},{c:'#f59e0b',l:'Warning',p:'30%'},{c:'#ef4444',l:'Critical',p:'10%'}].map((x,i)=>(
               <div key={i} style={{display:'flex',alignItems:'center',gap:10,fontSize:13,color:'var(--text2)'}}>
                 <div style={{width:10,height:10,borderRadius:'50%',background:x.c,flexShrink:0}}/>
@@ -222,7 +222,7 @@ export default function ProjectsSection() {
             <span style={{background:'#fee2e2',color:'#ef4444',fontSize:10,fontWeight:700,padding:'2px 8px',borderRadius:10}}>3 new</span>
           </div>
         </div>
-        <div style={{display:'flex',gap:10}}>
+        <div className="alerts-row" style={{display:'flex',gap:10}}>
           {PROJ_ALERTS.map((a,i)=>{
             const cfg={error:{bg:'#fff5f5',bc:'#ef4444',ico:'🔴'},warning:{bg:'#fffbeb',bc:'#f59e0b',ico:'⚠️'},info:{bg:'#eff6ff',bc:'#3b82f6',ico:'ℹ️'}}[a.type];
             return(

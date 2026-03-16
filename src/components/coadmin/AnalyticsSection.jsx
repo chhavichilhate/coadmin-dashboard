@@ -161,7 +161,7 @@ export default function AnalyticsSection() {
   return (
     <div>
       {/* 1. Stats */}
-      <div style={{display:'flex',gap:12,marginBottom:16}}>
+      <div className="stats-flex-row" style={{display:'flex',gap:12,marginBottom:16}}>
         {ANALYTICS_STATS.map((s,i)=>(
           <div key={i} style={{background:'var(--card)',border:s.hl?'1.5px solid #ef4444':'1px solid var(--border)',borderRadius:12,padding:'14px 16px',flex:1,minWidth:0,position:'relative'}}>
             {s.hl&&<div style={{position:'absolute',top:0,right:0,background:'#ef4444',color:'#fff',fontSize:9,fontWeight:700,padding:'2px 8px',borderRadius:'0 12px 0 8px'}}>Action Required</div>}
@@ -238,7 +238,7 @@ export default function AnalyticsSection() {
             <span style={{background:'#fee2e2',color:'#ef4444',fontSize:10,fontWeight:700,padding:'2px 8px',borderRadius:10}}>3 new</span>
           </div>
         </div>
-        <div style={{display:'flex',gap:10}}>
+        <div className="alerts-row" style={{display:'flex',gap:10}}>
           {CRIT_ALERTS.map((a,i)=>{
             const cfg={error:{bg:'#fff5f5',bc:'#ef4444',ico:'🔴'},warning:{bg:'#fffbeb',bc:'#f59e0b',ico:'⚠️'},info:{bg:'#eff6ff',bc:'#3b82f6',ico:'ℹ️'}}[a.type];
             return(

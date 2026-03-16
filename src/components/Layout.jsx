@@ -74,6 +74,13 @@ function AIAssistant() {
 
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile,  setIsMobile]  = useState(() => window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
   const [dark,      setDark]      = useState(() => localStorage.getItem('coadmin_theme') === 'dark');
   const [day,       setDay]       = useState('');
   const [dateStr,   setDateStr]   = useState('');
@@ -107,11 +114,21 @@ export default function Layout() {
     <div className="app">
 
       {/* ── SIDEBAR ── */}
-      <aside className={'sidebar' + (collapsed ? ' collapsed' : '')}>
+      {/* Mobile overlay */}
+      {isMobile && collapsed && (
+        <div className="sidebar-overlay show" onClick={() => setCollapsed(false)} />
+      )}
+
+      <aside className={
+        'sidebar' +
+        (isMobile
+          ? (collapsed ? ' mobile-open' : '')
+          : (collapsed ? ' collapsed' : ''))
+      }>
 
         {/* Hamburger only — no brand name */}
         <div style={{ padding:'14px 12px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', flexShrink:0 }}>
-          <button className="ham-btn" onClick={() => setCollapsed(c => !c)}>
+          <button className="ham-btn" onClick={() => setCollapsed(c => !c)} style={{ flexShrink:0 }}>
             <span /><span /><span />
           </button>
         </div>
@@ -164,12 +181,19 @@ export default function Layout() {
           <div style={{ display:'flex', alignItems:'center', gap:16 }}>
 
             {/* Date — "Friday | Dec 26,2025" */}
-            <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', whiteSpace:'nowrap' }}>
+            <div className="topbar-date" style={{ fontSize:13, fontWeight:600, color:'var(--text)', whiteSpace:'nowrap' }}>
               {day} | {dateStr}
             </div>
 
-            
-            {/* Green toggle */}
+            {/* Blue star icon like Figma */}
+            <div style={{
+              width:32, height:32, borderRadius:'50%',
+              background: dark ? '#1e40af' : '#3b82f6',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              color:'#fff', fontSize:14, flexShrink:0
+            }}>✦</div>
+
+            {/* Green toggle — Figma style */}
             <div
               className={'toggle-track' + (dark ? ' on' : '')}
               onClick={() => setDark(d => !d)}

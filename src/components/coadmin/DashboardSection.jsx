@@ -64,7 +64,7 @@ function SprintDonut() {
           <div style={{ fontSize:10, color:'var(--muted)', marginTop:2 }}>Adherence</div>
         </div>
       </div>
-      <div style={{ display:'flex', flexDirection:'row', gap:12 }}>
+      <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
         {[
           { c:'#22c55e', l:'Healthy'   },
           { c:'#3b82f6', l:'Planned'   },
@@ -164,7 +164,7 @@ export default function DashboardSection() {
     <div>
 
       {/* ── 1. Stat Cards ── */}
-      <div style={{ display:'flex', gap:12, marginBottom:16 }}>
+      <div className="stats-flex-row" style={{ display:'flex', gap:12, marginBottom:16 }}>
         {STATS.map((s,i) => (
           <div key={i} style={{
             background:'var(--card)', border:'1px solid var(--border)',
@@ -321,7 +321,7 @@ export default function DashboardSection() {
         </div>
 
         {/* Horizontal: 3 cards + button */}
-        <div style={{ display:'flex', gap:10, alignItems:'stretch' }}>
+        <div className="alerts-row" style={{ display:'flex', gap:10, alignItems:'stretch' }}>
 
           {/* Card 1 — Error */}
           <div style={{ flex:1, padding:'14px', borderRadius:10, background:'#fff5f5', borderLeft:'3px solid #ef4444', minWidth:0 }}>

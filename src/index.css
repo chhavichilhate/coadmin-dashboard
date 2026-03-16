@@ -316,13 +316,161 @@ html,body { height:100%; font-family:var(--font); background:var(--bg); color:va
 ::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:10px; }
 
-/* ── RESPONSIVE ── */
-@media(max-width:1100px) { .g3 { grid-template-columns:1fr 1fr; } }
-@media(max-width:960px)  { .g2,.g12,.g21 { grid-template-columns:1fr; } .chat-layout { grid-template-columns:1fr; } }
-@media(max-width:768px)  {
-  :root { --sb-w:0px; }
-  .sidebar { position:fixed; left:-220px; width:220px !important; min-width:220px !important; z-index:999; box-shadow:var(--shadow-lg); transition:left .25s ease; }
-  .sidebar.collapsed { left:0 !important; }
-  .topbar { padding:0 14px; }
-  .content > div { padding:14px !important; }
+/* ══ RESPONSIVE ══════════════════════════════════════════ */
+
+/* Tablet */
+@media(max-width:1100px) {
+  .g3 { grid-template-columns:1fr 1fr; }
 }
+
+/* Small Tablet */
+@media(max-width:960px) {
+  .g2,.g12,.g21 { grid-template-columns:1fr; }
+  .chat-layout { grid-template-columns:1fr; }
+}
+
+/* Mobile */
+@media(max-width:768px) {
+  :root { --sb-w:0px; --hdr-h:58px; }
+
+  /* Sidebar slides in from left */
+  .sidebar {
+    position:fixed !important;
+    left:-240px !important;
+    top:0; bottom:0;
+    width:240px !important;
+    min-width:240px !important;
+    z-index:998;
+    box-shadow:var(--shadow-lg);
+    transition:left .28s ease !important;
+  }
+  .sidebar.mobile-open {
+    left:0 !important;
+  }
+
+  /* Main takes full width */
+  .main { width:100vw; }
+
+  /* Topbar */
+  .topbar { padding:0 12px; gap:8px; }
+
+  /* Content padding */
+  .content > div { padding:12px 12px 80px !important; }
+
+  /* All grids single column */
+  .g2,.g3,.g12,.g21 { grid-template-columns:1fr !important; }
+
+  /* Stat cards — 2 per row */
+  .stat-cards-row {
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+  }
+
+  /* Dashboard stats row — 2x3 grid on mobile */
+  .stats-flex-row {
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    flex-wrap:wrap !important;
+  }
+
+  /* Tables scroll */
+  table { font-size:11px !important; }
+  .tbl-wrap, .card table { overflow-x:auto; display:block; }
+
+  /* Cards */
+  .card { padding:14px 14px !important; }
+
+  /* Topbar date hide */
+  .topbar-date { display:none !important; }
+
+  /* Meetings grid */
+  .meetings-grid { grid-template-columns:1fr !important; }
+
+  /* Projects grid */
+  .projects-grid { grid-template-columns:1fr !important; }
+
+  /* Chat */
+  .chat-layout { grid-template-columns:1fr !important; height:auto !important; }
+
+  /* Issues alerts wrap */
+  .alerts-row { flex-direction:column !important; }
+  .alerts-row > div { min-width:100% !important; }
+
+  /* Funnel labels */
+  .fn-lbl { width:45px !important; font-size:11px !important; }
+
+  /* Page title */
+  .pg-name { font-size:16px !important; }
+
+  /* Hide text in topbar when small */
+  .user-role { display:none !important; }
+
+  /* Tab buttons smaller */
+  .tab-btn { padding:4px 10px !important; font-size:11.5px !important; }
+
+  /* Bottleneck on mobile */
+  .bottleneck-row { flex-wrap:wrap; }
+}
+
+/* Very Small Mobile */
+@media(max-width:480px) {
+  :root { --hdr-h:54px; }
+
+  .topbar { padding:0 10px; }
+  .content > div { padding:10px 10px 80px !important; }
+
+  /* Stat cards single column */
+  .stats-flex-row {
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  /* Tables */
+  table { font-size:10px !important; }
+  td, th { padding:8px 8px !important; }
+
+  /* Card */
+  .card { padding:12px 12px !important; border-radius:10px !important; }
+
+  /* Tabs scrollable */
+  .tab-nav {
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    flex-wrap:nowrap !important;
+  }
+  .tab-nav::-webkit-scrollbar { display:none; }
+  .tab-btn { flex-shrink:0; white-space:nowrap; }
+
+  /* Topbar compact */
+  .topbar-date { display:none !important; }
+  .user-name-small { font-size:12px !important; }
+
+  /* Funnel */
+  .fn-bar { font-size:11px !important; }
+  .fn-lbl { font-size:11px !important; width:40px !important; }
+
+  /* Workload */
+  .wl-ct { font-size:10px !important; }
+
+  /* Hide toggle on very small */
+  .toggle-track { transform:scale(.85); }
+
+  /* Issues alerts */
+  .alerts-row { flex-direction:column !important; gap:8px !important; }
+  .alerts-row > * { width:100% !important; min-width:unset !important; }
+
+  /* Page name */
+  .pg-name { font-size:15px !important; }
+}
+
+/* Overlay when sidebar open on mobile */
+.sidebar-overlay {
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:997;
+  backdrop-filter:blur(2px);
+}
+.sidebar-overlay.show { display:block; }
