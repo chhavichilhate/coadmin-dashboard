@@ -1,6 +1,6 @@
 // src/data/mockData.js
 
-// ── Co Admin 1: Dashboard ─────────────────
+// Dashboard 
 export const STATS = [
   { label:'Total Tasks',  value:142, change:'+9%',  up:true,  icon:'📋', color:'blue'   },
   { label:'Completed',    value:89,  change:'+12%', up:true,  icon:'✅', color:'green'  },
@@ -41,7 +41,7 @@ export const DASH_ALERTS = [
   { type:'info',    title:'Missing Assets for Sprint 25', desc:'Designer out sick today.',                                     time:'6h ago' },
 ];
 
-// ── Co Admin 2: Projects ──────────────────
+//  Projects 
 export const PROJ_STATS = [
   { label:'TOTAL PROJECTS', value:12,  change:'+2',         icon:'📁', color:'gray',  highlight:false },
   { label:'ACTIVE',         value:8,   change:'',           icon:'▶️', color:'blue',  highlight:false },
@@ -82,7 +82,7 @@ export const PROJ_ALERTS = [
   { type:'info',    title:'Budget Update',      desc:'Q4 budget capacity 4% worn'                     },
 ];
 
-// ── Co Admin 3: Analytics ─────────────────
+//  Analytics 
 export const ANALYTICS_STATS = [
   { label:'Total Tasks',     value:50,   change:'+4 this week',        up:true,  icon:'📋', color:'blue',  highlight:false },
   { label:'Total Tasks',     value:10,   change:'+12% vs last sprint', up:true,  icon:'✅', color:'green', highlight:false },
@@ -132,10 +132,10 @@ export const SPRINT_HEALTH_BARS = [
   { label:'Team Morale',   value:'4.2/5',pct:84, color:'#3b82f6' },
 ];
 
-// ── Auth ──────────────────────────────────
+//  Auth 
 export const AUTH = { email:'admin@gmail.com', password:'admin123' };
 
-// ── Chat ──────────────────────────────────
+//  Chat 
 export const CHATS = [
   { id:0, name:'Alice Kim',   init:'AK', color:'#ef4444', online:true,  time:'10:42 AM', msg:'Sure, will check it out!',      unread:2 },
   { id:1, name:'Bob Chen',    init:'BC', color:'#3b82f6', online:true,  time:'9:30 AM',  msg:'The report is ready for review',unread:1 },
@@ -150,7 +150,7 @@ export const CHAT_MESSAGES = {
   3: [{ init:'DL', color:'#f59e0b', text:'Standup at 10am.', time:'Yesterday', mine:false }],
 };
 
-// ── Meetings ──────────────────────────────
+//  Meetings 
 export const MEETINGS_DATA = [
   { id:1, title:'Sprint 20 Planning',      date:'Mon, Mar 17', time:'10:00 AM', attendees:8,  type:'Planning',  color:'#3b82f6' },
   { id:2, title:'Design Review Session',   date:'Tue, Mar 18', time:'2:00 PM',  attendees:5,  type:'Review',    color:'#a855f7' },
@@ -159,7 +159,7 @@ export const MEETINGS_DATA = [
   { id:5, title:'API Architecture Review', date:'Fri, Mar 21', time:'1:00 PM',  attendees:6,  type:'Technical', color:'#ef4444' },
 ];
 
-// ── Documents ─────────────────────────────
+//  Documents 
 export const DOCS = [
   { name:'Sprint 20 Planning Doc',     size:'2.4 MB', date:'Mar 12, 2025', icon:'📄', color:'#3b82f6' },
   { name:'Q1 Performance Report',      size:'5.1 MB', date:'Mar 10, 2025', icon:'📊', color:'#22c55e' },
@@ -168,21 +168,21 @@ export const DOCS = [
   { name:'Security Audit Report 2025', size:'3.2 MB', date:'Mar 1, 2025',  icon:'🔒', color:'#ef4444' },
 ];
 
-// ── Complaints ────────────────────────────
+//Complaints 
 export const COMPLAINTS = [
   { id:'CMP-001', title:'Login page slow on mobile',    submitter:'Alice Kim',   date:'Mar 10, 2025', priority:'High',    status:'In Progress', sc:'#f59e0b', pc:'#ef4444' },
   { id:'CMP-002', title:'Dashboard charts not loading', submitter:'Bob Chen',    date:'Mar 9, 2025',  priority:'Critical',status:'Open',        sc:'#ef4444', pc:'#7c3aed' },
   { id:'CMP-003', title:'Email notifications delayed',  submitter:'Carol Davis', date:'Mar 8, 2025',  priority:'Medium',  status:'Resolved',    sc:'#22c55e', pc:'#f59e0b' },
 ];
 
-// ── Notices ───────────────────────────────
+//  Notices
 export const NOTICES = [
   { title:'Sprint 20 Kickoff Meeting',     date:'Mar 15, 2025', type:'Meeting',   color:'#3b82f6', body:'Sprint 20 begins Monday March 17. All team members must attend.' },
   { title:'New Security Policy Update',    date:'Mar 14, 2025', type:'Policy',    color:'#ef4444', body:'Important security policy changes effective from April 1st.' },
   { title:'Office Closed - Public Holiday',date:'Mar 13, 2025', type:'Holiday',   color:'#22c55e', body:'The office will be closed on March 25th for the public holiday.' },
 ];
 
-// ── Attendance ────────────────────────────
+// Attendance 
 export const ATTENDANCE = [
   { name:'Alice Kim',   init:'AK', color:'#ef4444', dept:'Engineering', present:18, absent:2, late:1, leave:1, status:'Active'   },
   { name:'Bob Chen',    init:'BC', color:'#3b82f6', dept:'Engineering', present:20, absent:0, late:2, leave:0, status:'Active'   },

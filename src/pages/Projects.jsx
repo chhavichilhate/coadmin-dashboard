@@ -54,7 +54,7 @@ export default function Projects() {
   const progressColor = (pct) => pct === 100 ? '#22c55e' : pct > 60 ? '#3b82f6' : pct > 30 ? '#f59e0b' : '#ef4444';
 
   return (
-    <div style={{ padding:'22px 24px 40px' }}>
+    <div style={{ padding:'22px 24px 40px', overflowX:'hidden', maxWidth:'100%' }}>
 
       {/* Header */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20 }}>
@@ -65,8 +65,8 @@ export default function Projects() {
       </div>
 
       {/* Filter Tabs */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20, flexWrap:'wrap', gap:12 }}>
-        <div style={{ display:'flex', gap:4 }}>
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20, flexWrap:'wrap', gap:10 }}>
+        <div className="projects-tabs" style={{ display:'flex', gap:4 }}>
           {tabs.map(t => (
             <button key={t.label} onClick={() => setFilter(t.label)} style={{
               padding:'7px 16px', borderRadius:8,
@@ -103,7 +103,7 @@ export default function Projects() {
       </div>
 
       {/* Date Range */}
-      <div style={{ display:'flex', gap:12, marginBottom:20, alignItems:'center' }}>
+      <div style={{ display:'flex', gap:12, marginBottom:20, alignItems:'center', flexWrap:'wrap' }}>
         <div>
           <div style={{ fontSize:11, fontWeight:600, color:'var(--muted)', marginBottom:5, textTransform:'uppercase', letterSpacing:'.5px' }}>DATE RANGE</div>
           <div style={{ display:'flex', gap:8 }}>
@@ -117,7 +117,7 @@ export default function Projects() {
       </div>
 
       {/* Project Cards Grid */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(280px, 100%), 1fr))', gap:16 }}>
         {filtered.map((p,i) => (
           <div key={i} style={{
             background:'var(--card)', borderRadius:14,

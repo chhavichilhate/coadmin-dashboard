@@ -22,7 +22,7 @@ const PROJECT_PROGRESS = [
 
 // data hardcoded in components below
 
-/* ══ Sprint Health Donut  ══ */
+/* ══ Sprint Health Donut — Green DOMINANT like screenshot ══ */
 function SprintDonut() {
   const ref   = useRef(null);
   const chart = useRef(null);
@@ -56,21 +56,21 @@ function SprintDonut() {
   }, []);
 
   return (
-    <div style={{ display:'flex', alignItems:'center', gap:32 }}>
-      <div style={{ width:130, height:130, position:'relative', flexShrink:0 }}>
+    <div className="donut-wrapper" style={{ display:'flex', alignItems:'center', gap:24 }}>
+      <div style={{ width:120, height:120, position:'relative', flexShrink:0 }}>
         <canvas ref={ref} />
         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', textAlign:'center' }}>
-          <div style={{ fontSize:22, fontWeight:800, color:'var(--text)', lineHeight:1 }}>90%</div>
+          <div style={{ fontSize:20, fontWeight:800, color:'var(--text)', lineHeight:1 }}>90%</div>
           <div style={{ fontSize:10, color:'var(--muted)', marginTop:2 }}>Adherence</div>
         </div>
       </div>
-      <div style={{ display:'flex', flexDirection:'row', gap:12 }}>
+      <div style={{ display:'flex', flexDirection:'row', gap:16, flexWrap:'wrap' }}>
         {[
           { c:'#22c55e', l:'Healthy'   },
           { c:'#3b82f6', l:'Planned'   },
           { c:'#e2e8f0', l:'Remaining' },
         ].map((x,i) => (
-          <div key={i} style={{ display:'flex', alignItems:'center', gap:8, fontSize:13, color:'var(--text2)' }}>
+          <div key={i} style={{ display:'flex', alignItems:'center', gap:7, fontSize:13, color:'var(--text2)', flexShrink:0 }}>
             <div style={{ width:9, height:9, borderRadius:'50%', background:x.c, flexShrink:0 }} />
             {x.l}
           </div>
@@ -80,7 +80,7 @@ function SprintDonut() {
   );
 }
 
-/* ══ Team Bar Charts ══ */
+/* ══ Team Bar Chart — canvas directly, guaranteed bars ══ */
 function TeamBarChart() {
   const ref   = useRef(null);
   const chart = useRef(null);
@@ -248,7 +248,7 @@ export default function DashboardSection() {
         <TeamBarChart />
       </div>
 
-      {/* ── 6. Bottleneck Detection  ── */}
+      {/* ── 6. Bottleneck Detection — exactly like Figma ── */}
       <div className="card mb">
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:18 }}>
           <div style={{ fontSize:15, fontWeight:800, color:'var(--text)' }}>Bottleneck Detection</div>

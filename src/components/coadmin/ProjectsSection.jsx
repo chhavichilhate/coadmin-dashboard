@@ -100,7 +100,7 @@ export default function ProjectsSection() {
               <div style={{fontSize:10,color:'var(--muted)',textTransform:'uppercase'}}>Projects</div>
             </div>
           </div>
-          <div style={{display:'flex',flexDirection:'row',gap:14}}>
+          <div className="donut-legend" style={{display:'flex',flexDirection:'row',gap:20,flexWrap:'wrap'}}>
             {[{c:'#22c55e',l:'Healthy',p:'60%'},{c:'#f59e0b',l:'Warning',p:'30%'},{c:'#ef4444',l:'Critical',p:'10%'}].map((x,i)=>(
               <div key={i} style={{display:'flex',alignItems:'center',gap:10,fontSize:13,color:'var(--text2)'}}>
                 <div style={{width:10,height:10,borderRadius:'50%',background:x.c,flexShrink:0}}/>
@@ -169,7 +169,8 @@ export default function ProjectsSection() {
           <div style={{fontSize:15,fontWeight:800,color:'var(--text)'}}>All Projects</div>
           <button style={{background:'none',border:'none',cursor:'pointer',fontSize:20,color:'var(--muted)'}}>⋯</button>
         </div>
-        <table style={{width:'100%',borderCollapse:'collapse',fontSize:13}}>
+        <div style={{overflowX:'auto',width:'100%'}}>
+        <table style={{width:'100%',borderCollapse:'collapse',fontSize:13,minWidth:500}}>
           <thead>
             <tr>
               {['PROJECT NAME','STATUS','HEALTH','PROGRESS','TEAM','ACTIONS'].map((h,i)=>(
@@ -205,6 +206,7 @@ export default function ProjectsSection() {
             ))}
           </tbody>
         </table>
+        </div>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 4px 0'}}>
           <span style={{fontSize:12,color:'var(--muted)'}}>Showing 3 of 12 projects</span>
           <div style={{display:'flex',gap:8}}>

@@ -134,7 +134,7 @@ function DeliveryDonut() {
     datasets:[{ data:[18,6], backgroundColor:['#3b82f6','#e2e8f0'], borderWidth:0 }]
   };
   return (
-    <div style={{display:'flex',alignItems:'center',gap:40}}>
+    <div className="donut-wrapper" style={{display:'flex',alignItems:'center',gap:32}}>
       <div style={{width:120,height:120,position:'relative',flexShrink:0}}>
         <Doughnut data={data} options={{cutout:'68%',plugins:{legend:{display:false}}}}/>
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',textAlign:'center'}}>

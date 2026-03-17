@@ -96,11 +96,11 @@ export default function Chat() {
   };
 
   return (
-    <div style={{ padding:'22px 24px 0', height:'calc(100vh - 62px)', display:'flex', flexDirection:'column' }}>
-      <div style={{ display:'flex', gap:0, flex:1, background:'var(--card)', borderRadius:14, border:'1px solid var(--border)', overflow:'hidden', boxShadow:'var(--shadow)' }}>
+    <div style={{ padding:'22px 24px 0', minHeight:'calc(100vh - 62px)', display:'flex', flexDirection:'column' }}>
+      <div className="chat-container" style={{ display:'flex', gap:0, flex:1, background:'var(--card)', borderRadius:14, border:'1px solid var(--border)', overflow:'hidden', boxShadow:'var(--shadow)' }}>
 
         {/* LEFT: Contact List */}
-        <div style={{ width:300, flexShrink:0, borderRight:'1px solid var(--border)', display:'flex', flexDirection:'column' }}>
+        <div className="chat-sidebar-panel" style={{ width:300, flexShrink:0, borderRight:'1px solid var(--border)', display:'flex', flexDirection:'column' }}>
 
           {/* Header */}
           <div style={{ padding:'18px 18px 12px', borderBottom:'1px solid var(--border)' }}>

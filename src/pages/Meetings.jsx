@@ -173,7 +173,7 @@ export default function Meetings() {
 
       {/* Filters */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20, gap:12 }}>
-        <div style={{ display:'flex', gap:4, background:'var(--bg)', borderRadius:9, padding:4, border:'1px solid var(--border)' }}>
+        <div className="meetings-filter-tabs" style={{ display:'flex', gap:4, background:'var(--bg)', borderRadius:9, padding:4, border:'1px solid var(--border)' }}>
           {['All','Ongoing','Upcoming','Past'].map(f => (
             <button key={f} onClick={() => setFilter(f)} style={{ padding:'6px 16px', borderRadius:7, border:'none', background:filter===f?'var(--blue)':'transparent', color:filter===f?'#fff':'var(--text2)', fontSize:12.5, fontWeight:600, cursor:'pointer', transition:'all .2s' }}>{f}</button>
           ))}
@@ -186,7 +186,7 @@ export default function Meetings() {
       </div>
 
       {/* Cards */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(280px, 100%), 1fr))', gap:16 }}>
         {filtered.map((m,i) => (
           <div key={i} style={{ background:'var(--card)', borderRadius:14, border:'1px solid var(--border)', padding:'18px', boxShadow:'var(--shadow-sm)', transition:'all .2s', animation:'fadeUp .3s ease both', animationDelay:i*.05+'s' }}>
             <div style={{ display:'flex', justifyContent:'space-between', marginBottom:12 }}>

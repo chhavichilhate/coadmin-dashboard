@@ -73,11 +73,16 @@ function AIAssistant() {
 }
 
 export default function Layout() {
-  const [collapsed, setCollapsed] = useState(false);
-  const [isMobile,  setIsMobile]  = useState(() => window.innerWidth <= 768);
+  const [collapsed,   setCollapsed]   = useState(false);
+  const [mobileOpen,  setMobileOpen]  = useState(false);
+  const [isMobile,    setIsMobile]    = useState(() => window.innerWidth <= 768);
 
   useEffect(() => {
-    const handler = () => setIsMobile(window.innerWidth <= 768);
+    const handler = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (!mobile) setMobileOpen(false);
+    };
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
   }, []);
@@ -114,23 +119,25 @@ export default function Layout() {
     <div className="app">
 
       {/* ── SIDEBAR ── */}
-      {/* Mobile overlay */}
-      {isMobile && collapsed && (
-        <div className="sidebar-overlay show" onClick={() => setCollapsed(false)} />
+      {/* Mobile overlay - dark bg when sidebar open */}
+      {isMobile && mobileOpen && (
+        <div className="sidebar-overlay show" onClick={() => setMobileOpen(false)} />
       )}
 
       <aside className={
         'sidebar' +
         (isMobile
-          ? (collapsed ? ' mobile-open' : '')
+          ? (mobileOpen ? ' mobile-open' : '')
           : (collapsed ? ' collapsed' : ''))
       }>
 
-        {/* Hamburger only  */}
-        <div style={{ padding:'14px 12px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', flexShrink:0 }}>
-          <button className="ham-btn" onClick={() => setCollapsed(c => !c)} style={{ flexShrink:0 }}>
-            <span /><span /><span />
-          </button>
+        {/* Sidebar top  */}
+        <div style={{ height:'64px', borderBottom:'1px solid var(--border)', flexShrink:0, display:'flex', alignItems:'center', padding:'0 12px' }}>
+          {!isMobile && (
+            <button className="ham-btn" onClick={() => setCollapsed(c => !c)}>
+              <span /><span /><span />
+            </button>
+          )}
         </div>
 
         {/* Nav */}
@@ -159,13 +166,19 @@ export default function Layout() {
       </aside>
 
       {/* ── MAIN ── */}
-      <div className="main">
+      <div className="main" style={{ overflowX:'hidden', maxWidth:'100vw' }}>
 
-        {/* ── TOPBAR  */}
+        {/* ── TOPBAR */}
         <header className="topbar">
 
-          {/* LEFT: Avatar + Hello John Doe + Co-Admin */}
+          {/* LEFT: Mobile Hamburger + Avatar + Hello John Doe */}
           <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+            {/* Hamburger — ONLY on mobile in topbar */}
+            {isMobile && (
+              <button className="ham-btn" onClick={() => setMobileOpen(o => !o)} style={{ flexShrink:0 }}>
+                <span /><span /><span />
+              </button>
+            )}
             <div style={{ width:42, height:42, borderRadius:'50%', background:'linear-gradient(135deg,#ef4444,#dc2626)', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:14, fontWeight:800, flexShrink:0, boxShadow:'0 2px 8px rgba(239,68,68,.3)' }}>{initials}</div>
             <div>
               <div style={{ fontSize:13, color:'var(--text)', lineHeight:1.2 }}>
@@ -185,7 +198,6 @@ export default function Layout() {
               {day} | {dateStr}
             </div>
 
-
             {/* Green toggle  */}
             <div
               className={'toggle-track' + (dark ? ' on' : '')}
@@ -198,7 +210,7 @@ export default function Layout() {
         </header>
 
         {/* Content */}
-        <div className="content">
+        <div className="content" style={{ overflowX:'hidden' }}>
           <Outlet />
         </div>
       </div>

@@ -45,7 +45,7 @@ export default function Attendance() {
   );
 
   return (
-    <div style={{ padding:'22px 24px 40px' }}>
+    <div style={{ padding:'22px 24px 40px', overflowX:'hidden', maxWidth:'100%' }}>
 
       {/* Header */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:24 }}>
@@ -61,7 +61,7 @@ export default function Attendance() {
       </div>
 
       {/* Stats Cards */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:16, marginBottom:20 }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(160px,100%), 1fr))', gap:12, marginBottom:20 }}>
         {[
           { label:'Present Days', value:13, sub:'This Month', icon:'✅', iconBg:'#f0fdf4', iconC:'#22c55e' },
           { label:'Absent Days',  value:2,  sub:'This Month', icon:'❌', iconBg:'#fff5f5', iconC:'#ef4444' },
@@ -81,7 +81,7 @@ export default function Attendance() {
       {/* Mark Presence */}
       <div className="card mb">
         <div style={{ fontSize:15, fontWeight:800, color:'#ef4444', marginBottom:16 }}>Mark the Presence</div>
-        <div style={{ display:'flex', gap:40, alignItems:'center' }}>
+        <div style={{ display:'flex', gap:24, alignItems:'flex-start', flexWrap:'wrap' }}>
           <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
             <div style={{ fontSize:12, color:'var(--muted)', fontWeight:600 }}>In :-</div>
             <div style={{ fontSize:16, fontWeight:700, color:'var(--text)', minWidth:80 }}>
@@ -114,7 +114,7 @@ export default function Attendance() {
       </div>
 
       {/* Leave Table */}
-      <div className="card" style={{ padding:0, overflow:'hidden' }}>
+      <div className="card" style={{ padding:0, overflow:'hidden', overflowX:'auto' }}>
         <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13 }}>
           <thead>
             <tr style={{ background:'var(--bg)' }}>
