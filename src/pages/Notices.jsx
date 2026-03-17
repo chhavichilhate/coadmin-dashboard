@@ -63,7 +63,7 @@ export default function Notices() {
   const activityToShow = showAllAct ? ACTIVITY : ACTIVITY.slice(0, 3);
 
   return (
-    <div style={{ padding:'22px 24px 40px' }}>
+    <div style={{ padding:'22px 24px 40px', overflowX:'hidden', maxWidth:'100%' }}>
 
       {/* Header */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:24 }}>
@@ -111,8 +111,8 @@ export default function Notices() {
 
       {/* Latest Updates */}
       <div style={{ fontSize:16, fontWeight:800, color:'var(--text)', marginBottom:14 }}>Latest Updates</div>
-      <div className="card" style={{ padding:0, overflow:'hidden' }}>
-        <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13 }}>
+      <div className="card" style={{ padding:0, overflow:'hidden', overflowX:'auto' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, minWidth:480 }}>
           <tbody>
             {filtered.length === 0 ? (
               <tr><td colSpan={5} style={{ padding:'40px', textAlign:'center', color:'var(--muted)' }}>No notices found</td></tr>

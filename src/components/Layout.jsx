@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { path:'/projects',   label:'Projects',            Icon:FiFolder                    },
   { path:'/chat',       label:'Chat',                Icon:FiMessageSquare, badge:10   },
   { path:'/meetings',   label:'Meetings',            Icon:FiCalendar,      badge:2    },
-  { path:'/documents',  label:'Documents And Report',Icon:FiFileText                  },
+  { path:'/documents',  label:'Documents & Report', Icon:FiFileText                   },
   { path:'/complaints', label:'Complaints',          Icon:FiAlertTriangle             },
   { path:'/notices',    label:'Notice',              Icon:FiVolume2,       badge:3    },
   { path:'/attendance', label:'Attendance And Leave',Icon:FiClock                     },
@@ -131,7 +131,7 @@ export default function Layout() {
           : (collapsed ? ' collapsed' : ''))
       }>
 
-        {/* Sidebar top  */}
+        {/* Sidebar top */}
         <div style={{ height:'64px', borderBottom:'1px solid var(--border)', flexShrink:0, display:'flex', alignItems:'center', padding:'0 12px' }}>
           {!isMobile && (
             <button className="ham-btn" onClick={() => setCollapsed(c => !c)}>
@@ -168,7 +168,7 @@ export default function Layout() {
       {/* ── MAIN ── */}
       <div className="main" style={{ overflowX:'hidden', maxWidth:'100vw' }}>
 
-        {/* ── TOPBAR */}
+        {/* ── TOPBAR  */}
         <header className="topbar">
 
           {/* LEFT: Mobile Hamburger + Avatar + Hello John Doe */}
@@ -197,6 +197,8 @@ export default function Layout() {
             <div className="topbar-date" style={{ fontSize:13, fontWeight:600, color:'var(--text)', whiteSpace:'nowrap' }}>
               {day} | {dateStr}
             </div>
+
+           
 
             {/* Green toggle  */}
             <div

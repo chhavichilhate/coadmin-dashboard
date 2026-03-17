@@ -151,10 +151,10 @@ export default function Meetings() {
   if (activeMeeting) return <MeetingRoom meeting={activeMeeting} onLeave={() => setActiveMeeting(null)} />;
 
   return (
-    <div style={{ padding:'22px 24px 40px' }}>
+    <div style={{ padding:'22px 24px 40px', overflowX:'hidden', maxWidth:'100%' }}>
 
       {/* Header */}
-      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:20 }}>
+      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:20, flexWrap:'wrap', gap:12 }}>
         <div>
           <div className="pg-name">Meetings</div>
           <div style={{ fontSize:12, color:'var(--muted)', marginTop:4 }}>Manage your schedule and prepare for upcoming calls</div>
@@ -172,7 +172,7 @@ export default function Meetings() {
       </div>
 
       {/* Filters */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20, gap:12 }}>
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20, gap:10, flexWrap:'wrap' }}>
         <div className="meetings-filter-tabs" style={{ display:'flex', gap:4, background:'var(--bg)', borderRadius:9, padding:4, border:'1px solid var(--border)' }}>
           {['All','Ongoing','Upcoming','Past'].map(f => (
             <button key={f} onClick={() => setFilter(f)} style={{ padding:'6px 16px', borderRadius:7, border:'none', background:filter===f?'var(--blue)':'transparent', color:filter===f?'#fff':'var(--text2)', fontSize:12.5, fontWeight:600, cursor:'pointer', transition:'all .2s' }}>{f}</button>

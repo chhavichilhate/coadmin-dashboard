@@ -67,7 +67,7 @@ export default function Documents() {
   };
 
   return (
-    <div style={{ padding:'22px 24px 40px' }}>
+    <div style={{ padding:'22px 24px 40px', overflowX:'hidden', maxWidth:'100%' }}>
 
       {/* Header */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20 }}>
@@ -79,7 +79,7 @@ export default function Documents() {
 
       {/* Tabs + Search */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20, flexWrap:'wrap', gap:12 }}>
-        <div style={{ display:'flex', gap:4 }}>
+        <div style={{ display:'flex', gap:4, overflowX:'auto', flexWrap:'nowrap', WebkitOverflowScrolling:'touch', scrollbarWidth:'none' }}>
           {TABS.map(t => (
             <button key={t} onClick={() => setActiveTab(t)} style={{
               padding:'8px 18px', borderRadius:9,
@@ -101,8 +101,8 @@ export default function Documents() {
       </div>
 
       {/* Table */}
-      <div className="card" style={{ padding:0, overflow:'hidden' }}>
-        <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13 }}>
+      <div className="card" style={{ padding:0, overflow:'hidden', overflowX:'auto' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, minWidth:520 }}>
           <thead>
             <tr style={{ background:'var(--bg)' }}>
               {['Name','Type','Version','Last Modified','Status',''].map((h,i) => (

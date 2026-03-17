@@ -80,7 +80,7 @@ html,body { height:100%; font-family:var(--font); background:var(--bg); color:va
   display:flex; align-items:center; justify-content:center;
   border-radius:7px; transition:background var(--t);
 }
-.nav-lbl { flex:1; transition:opacity .2s; font-size:13px; }
+.nav-lbl { flex:1; transition:opacity .2s; font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .nav-badge {
   background:#ef4444; color:#fff; font-size:10px; font-weight:700;
   min-width:18px; height:18px; border-radius:9px;
@@ -393,13 +393,16 @@ html,body { height:100%; font-family:var(--font); background:var(--bg); color:va
   .chat-container {
     flex-direction:column !important;
     height:auto !important;
+    min-height:80vh !important;
   }
   .chat-sidebar-panel {
     width:100% !important;
-    max-height:300px !important;
+    max-height:360px !important;
+    min-height:360px !important;
     border-right:none !important;
     border-bottom:1px solid var(--border) !important;
     flex-shrink:0 !important;
+    overflow-y:auto !important;
   }
 
   /* Meeting cards grid */
